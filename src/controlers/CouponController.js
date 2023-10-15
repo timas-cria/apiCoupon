@@ -12,8 +12,22 @@ module.exports = {
             json.result.push({
                 id: coupons[coupon].id,
                 value: coupons[coupon].value,
-                name: coupons[coupon].name
+                code: coupons[coupon].code
             });
+        }
+        res.json(json);
+    },
+    selectCoupon: async (req, res) => {// req = request, res = response 
+        let json = {erro:'', result:{}};
+
+        // criando um parâmetro baseado no código de um cupom
+        let code = req.params.code;
+
+        // solicitando a query vinda do arquivo CouponService.js
+        let coupon = await CouponService.selectCoupon(code);
+
+        if(coupon){
+            json.result = coupon;
         }
         res.json(json);
     }
