@@ -2,7 +2,7 @@ const CouponService = require('../services/CouponService');
 
 module.exports = {
     selectAll: async (req, res) => {// req = request, res = response 
-        let json = {erro:'', result:[]};
+        let json = {error:'', result:[]};
 
         let coupons = await CouponService.selectAll();
 
@@ -17,8 +17,9 @@ module.exports = {
         }
         res.json(json);
     },
+    
     selectCoupon: async (req, res) => {// req = request, res = response 
-        let json = {erro:'', result:{}};
+        let json = {error:'', result:{}};
 
         // criando um parâmetro baseado no código de um cupom
         let code = req.params.code;
@@ -28,6 +29,26 @@ module.exports = {
 
         if(coupon){
             json.result = coupon;
+        }
+        res.json(json);
+    },
+
+    createCoupon: async (req, res) => {// req = request, res = response 
+        let json = {error:'', result:{}};
+
+        let code = req.body.code;
+        let value = req.body.value;
+        console.log(req.body)
+
+        if(code && value){
+            let CouponId = await CouponService.createCoupon(code, value);
+            json.result = {
+                id: CouponId,
+                code,
+                value
+            };
+        }else {
+            json.error = "Invalid sended params"
         }
         res.json(json);
     }
