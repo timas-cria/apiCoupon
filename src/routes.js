@@ -12,7 +12,9 @@ router.get('/coupon/:code', CouponController.selectCoupon);
 
 // rota para adicionar cupons no banco de dados
 router.post('/coupon', CouponController.createCoupon);
-// rota funcionando apenas no rest test test, no postman nao funciona (no postman req.body é vazia)
-// TODO: investigar porque a rota nao funciona no postman e "arrumar" isso, se possível
+// NOTE: apenas mude de params para body no postman e a rota passa a funcionar 
+
+//rota de alteração de dados do banco de dados
+router.put('/coupon/:oldCode', CouponController.alterCoupon);
 
 module.exports = router;

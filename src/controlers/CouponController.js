@@ -51,5 +51,26 @@ module.exports = {
             json.error = "Invalid sended params"
         }
         res.json(json);
+    },
+
+    alterCoupon: async (req, res) => {// req = request, res = response 
+        let json = {error:'', result:{}};
+
+        let value = req.body.value;
+        let newCode = req.body.newCode;
+        let oldCode = req.params.oldCode;
+        console.log(req.body)
+
+        if(value && oldCode && newCode){
+            let CouponId = await CouponService.alterCoupon(value, newCode, oldCode);
+            json.result = {
+                id: CouponId,
+                newCode,
+                value
+            };
+        }else {
+            json.error = "Invalid sended params"
+        }
+        res.json(json);
     }
 }

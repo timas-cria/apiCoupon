@@ -54,5 +54,22 @@ module.exports = {
                 accepted(results.createCoupon)
             });
         });
+    },
+
+    // criando uma função, que será usada no CouponController.js que altera um cupom no banco de dados
+    // primeiro será selecionado um cupon pelo código do cupom (perceba que o código é diferente do id) depois este terá suas informações alteradas
+    alterCoupon: (value, newCode, oldCode) => {
+        // O objeto Promise representa a eventual conclusão (ou falha) de uma operação assíncrona e seu valor resultante
+        return new Promise((accepted, rejected) => {
+            // ? é substituido pelos valores dentro dos conchetes "[]"
+            db.query('update coupons set value = ?, code = ? where code = ?;', [value, newCode, oldCode] ,(error, results) => {
+                // se houver erros retorna-os, se não, retorna os resultados 
+                if(error) {
+                    rejected(error);
+                    return
+                }
+                accepted(results.createCoupon)
+            });
+        });
     }
 };
