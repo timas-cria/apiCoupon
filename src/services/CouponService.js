@@ -71,5 +71,19 @@ module.exports = {
                 accepted(results.createCoupon)
             });
         });
+    },
+
+    // criando uma função, que será usada na CouponController.js que exclui um cupom do banco de dados
+    // recebendo o código do cupom como parâmetro, utiliza este para escluir um cupom do banco
+    deleteCoupon: (code) => {
+        return new Promise((accepted, rejected) => {
+            db.query('delete from coupons where code = ?;', [code], (error, results) => {
+                if (error) {
+                    rejected(error);
+                    return
+                }
+                accepted(results);
+            });
+        });
     }
 };

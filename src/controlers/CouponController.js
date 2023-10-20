@@ -72,5 +72,14 @@ module.exports = {
             json.error = "Invalid sended params"
         }
         res.json(json);
+    },
+
+    deleteCoupon: async (req, res) => {// req = request, res = response 
+        let json = {error:'', result:{}};
+
+        let code = req.params.code;
+        await CouponService.deleteCoupon(code);
+
+        res.json(json);
     }
 }

@@ -14,7 +14,10 @@ router.get('/coupon/:code', CouponController.selectCoupon);
 router.post('/coupon', CouponController.createCoupon);
 // NOTE: apenas mude de params para body no postman e a rota passa a funcionar 
 
-//rota de alteração de dados do banco de dados
+// rota de alteração de dados do banco de dados
 router.put('/coupon/:oldCode', CouponController.alterCoupon);
+
+// rota para exclusão de um cupom no banco de dados
+router.delete('/coupon/:code', CouponController.deleteCoupon)
 
 module.exports = router;
